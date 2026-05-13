@@ -1,4 +1,4 @@
-name: Astroberry OS packages
+name: Astroberry OS meta-package
 
 on:
   workflow_dispatch:
