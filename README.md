@@ -13,6 +13,13 @@ Astroberry OS is an operating system for Raspberry Pi for controlling astronomy 
 [![Astroberry OS](https://github.com/astroberry-official/astroberry-os/actions/workflows/build-kstars.yml/badge.svg)](https://github.com/astroberry-official/astroberry-os/actions/workflows/build-kstars.yml)
 [![Astroberry OS](https://github.com/astroberry-official/astroberry-os/actions/workflows/build-phd2.yml/badge.svg)](https://github.com/astroberry-official/astroberry-os/actions/workflows/build-phd2.yml)
 [![Astroberry OS](https://github.com/astroberry-official/astroberry-os/actions/workflows/build-phdlogview.yml/badge.svg)](https://github.com/astroberry-official/astroberry-os/actions/workflows/build-phdlogview.yml)
+[![Astroberry OS](https://github.com/astroberry-official/astroberry-os/actions/workflows/build-gsc.yml/badge.svg)](https://github.com/astroberry-official/astroberry-os/actions/workflows/build-gsc.yml)
+
+[![Astroberry OS](https://github.com/astroberry-official/astroberry-os/actions/workflows/build-pyindi-client.yml/badge.svg)](https://github.com/astroberry-official/astroberry-os/actions/workflows/build-pyindi-client.yml)
+[![Astroberry OS](https://github.com/astroberry-official/astroberry-os/actions/workflows/build-indiweb.yml/badge.svg)](https://github.com/astroberry-official/astroberry-os/actions/workflows/build-indiweb.yml)
+[![Astroberry OS](https://github.com/astroberry-official/astroberry-os/actions/workflows/build-gpsdclient.yml/badge.svg)](https://github.com/astroberry-official/astroberry-os/actions/workflows/build-gpsdclient.yml)
+[![Astroberry OS](https://github.com/astroberry-official/astroberry-os/actions/workflows/build-yr-weather.yml/badge.svg)](https://github.com/astroberry-official/astroberry-os/actions/workflows/build-yr-weather.yml)
+
 
 [![Astroberry OS](http://img.youtube.com/vi/S5cMd0XJ1Hk/maxresdefault.jpg)](http://www.youtube.com/watch?v=S5cMd0XJ1Hk "Astroberry OS")
 
