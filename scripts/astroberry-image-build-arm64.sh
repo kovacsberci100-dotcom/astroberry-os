@@ -96,11 +96,26 @@ Pin: origin astroberry.io
 Pin-Priority: 900
 EOF
 
+# Set wireless regulatory domain
+if [ -e $ROOTFS/boot/firmware/cmdline.txt ] && [ -z "$(grep cfg80211.ieee80211_regdom $ROOTFS/boot/firmware/cmdline.txt)" ]; then
+    sed -i -e "s/\s*cfg80211.ieee80211_regdom=\S*//" -e "s/\(.*\)/\1 cfg80211.ieee80211_regdom=GB/" $ROOTFS/boot/firmware/cmdline.txt
+fi
+
 # Add post-installation clean up script
 cat <<EOF > "$ROOTFS/tmp/astroberry-os-cleanup.sh"
 #!/bin/bash
 
 export DEBIAN_FRONTEND=noninteractive
+
+# Clean AstroDMx installation files
+if [ -e /install.sh ]; then
+    rm -rf /install.sh
+fi
+
+# Hide AstroDMx from top level menu
+if [ -e /usr/share/desktop-directories/astrodmx.directory ]; then
+    echo "NoDisplay=true" >> /usr/share/desktop-directories/astrodmx.directory
+fi
 
 # Remove packages we don't need
 apt-get remove -y --purge modemmanager light-locker
@@ -142,15 +157,8 @@ EOF
 chmod 755 "$ROOTFS/tmp/astroberry-os-cleanup.sh"
 
 # Install Astroberry OS meta package
-chroot "$ROOTFS" /bin/bash -c "
-  export DEBIAN_FRONTEND=noninteractive &&
-  apt-get update &&
-  apt-get
-    -o Dpkg::Options::=\"--force-overwrite\"
-    -o Dpkg::Options::=\"--force-confdef\"
-    -o Dpkg::Options::=\"--force-confnew\"
-    install -yqq astroberry-os-desktop &&
-  /tmp/astroberry-os-cleanup.sh"
+chroot "$ROOTFS" /bin/bash -c \
+  "export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get -o Dpkg::Options::='--force-confnew' install -yq astroberry-os-desktop && /tmp/astroberry-os-cleanup.sh"
 
 # Unmount filesystems
 for dir in proc sys dev/pts dev; do
