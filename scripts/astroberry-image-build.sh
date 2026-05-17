@@ -43,6 +43,8 @@ EOF
 
 export DEBIAN_FRONTEND=noninteractive
 
+######################   Custom Fixes ###############################
+
 # Clean AstroDMx installation files
 if [ -e /install.sh ]; then
     rm -rf /install.sh
@@ -52,6 +54,15 @@ fi
 if [ -e /usr/share/desktop-directories/astrodmx.directory ]; then
     echo "NoDisplay=true" >> /usr/share/desktop-directories/astrodmx.directory
 fi
+
+# Fix Firecapture desktop file
+if [ ! -e /usr/share/applications/firecapture.desktop ] && [ -e /usr/share/applications/FireCapture\ v2.7.desktop ]; then
+    mv /usr/share/applications/FireCapture\ v2.7.desktop /usr/share/applications/firecapture.desktop
+    sed -i "/Terminal=true/d" /usr/share/applications/firecapture.desktop
+    sed -i "s/Categories=.*/Categories=Education;Science;Astronomy;/g" /usr/share/applications/firecapture.desktop
+fi
+
+######################################################################
 
 # Remove packages we don't need
 apt-get remove -y --purge modemmanager light-locker
@@ -236,6 +247,9 @@ build-amd64() {
     # Copy the installer and icon files to the image
     cp $WDIR/iso-installer-amd64/astroberry-installer.sh $ROOTFS/usr/bin/
     cp $WDIR/iso-installer-amd64/astroberry-installer.desktop $ROOTFS/usr/share/applications/
+
+    # Replace dock launcher: RaspberryPi Control Centre -> Astroberry OS Installer
+    sed -i 's/rpcc.desktop/astroberry-installer.desktop/g' $ROOTFS/etc/xdg/xfce4/panel/default.xml
 
     # Synchronize filesystem
     sync
